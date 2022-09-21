@@ -1,5 +1,7 @@
 #include "random.h"
 
-int utils::random::RandInt(){
+template<class T>
+int random<T>::RandInt(){
     return 5;
 }
+
