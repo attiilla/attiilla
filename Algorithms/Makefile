@@ -1,10 +1,12 @@
+CXX := g++
+
 all: output clean
 
-main.o: main.cpp
-	@g++ -c main.cpp
+%.o: %.cpp
+	@CXX -c $<
 
 output: main.o
-	@g++ main.o -o run.out
+	@CXX -o run.out *.o
 	@./run.out
 
 clean:
