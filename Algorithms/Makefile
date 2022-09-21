@@ -1,13 +1,15 @@
 CXX	:= g++
+OBJ := main.o
+TGT := run.out
 
 all: output clean
 
 %.o: %.cpp
 	@$(CXX) -c $<
 
-output: main.o
-	@$(CXX) -o run.out *.o
-	@./run.out
+output: $(OBJ)
+	@$(CXX) -o $(TGT) *.o
+	@./$(TGT)
 
 clean:
-	@rm -rf *.o run.out
+	@rm -rf *.o $(TGT)
