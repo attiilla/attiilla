@@ -1,5 +1,6 @@
 #compiler
 CXX := g++
+FLG := -std=c++1z -Wall 
 
 #folders
 HEADERF := ./sorting/header/
@@ -13,13 +14,14 @@ TGT := run.out
 SRC := $(wildcard $(SRCF)*.cpp)
 OBJ := $(patsubst $(SRCF)%.cpp, $(OBJF)%.o, $(SRC))
 
-all: output
+all: output clean
 
 $(OBJF)%.o: $(SRCF)%.cpp
-	@$(CXX) -c $< -o $@ -I$(HEADERF)
+	@$(CXX) $(FLG) -c $< -o $@ -I$(HEADERF)
 
 output: $(OBJ)
-	@$(CXX) -o $(BINF)$(TGT) $(OBJ)
+	@$(CXX) $(FLG) -o $(BINF)$(TGT) $(OBJ)
+	@$(BINF)$(TGT)
 
 clean:
 	@rm -rf $(OBJF)*.o $(BINF)$(TGT)
