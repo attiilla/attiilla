@@ -1,25 +1,25 @@
 #compiler
 CXX := g++
 
-#files
-OBJ := main.o
-TGT := run.out
-
 #folders
 HEADERF := ./sorting/header/
 SRCF := ./sorting/src/
 OBJF := ./sorting/obj/
-TGTF := ./sorting/bin/
+BINF := ./sorting/bin/
 
+#files
+MAIN := main
+TGT := run.out
+SRC := $(wildcard $(SRCF)*.cpp)
+OBJ := $(patsubst $(SRCF)%.cpp, $(OBJF)%.o, $(SRC))
 
-all: output clean
+all: output
 
-%.o: %.cpp
-	@$(CXX) -c $<
+$(OBJF)%.o: $(SRCF)%.cpp
+	@$(CXX) -c $< -o $@ -I$(HEADERF)
 
 output: $(OBJ)
-	@$(CXX) -o $(TGTF)$(TGT) *.o
-	@$(TGTF)$(TGT)
+	@$(CXX) -o $(BINF)$(TGT) $(OBJ)
 
 clean:
-	@rm -rf *.o $(TGTF)$(TGT)
+	@rm -rf $(OBJF)*.o $(BINF)$(TGT)
